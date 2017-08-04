@@ -12,49 +12,53 @@
             <h1>Students Information</h1>
             <p>Below are the students information, where we can add, edit and update student details.</p>
         </div>
-        <div ng-controller="IndexController">      
-            <table align="center" id="studentTable" border="1" class="table table-striped">
-                <tr>
-                    <th>ID</th>
-                    <th>Lastname</th>
-                    <th>Firstname</th>
-                    <th>Actions</th>
-                </tr>
-                <tr ng-repeat="student in studentModel">
-                    <td>{{student.id}}</td>
-                    <td><div ng-show="!myVar[student.id]"> {{student.lastName}}</div>
-                        <div ng-show="myVar[student.id]"><input type="text" placeholder="Last name" ng-model="student.lastName"/></div>
-                    </td>
-                    <td><div ng-show="!myVar[student.id]">{{student.firstName}}</div>
-                        <div ng-show="myVar[student.id]"}><input type="text" placeholder="First name" ng-model="student.firstName" /></div>       
-                    </td>
-                    <td  ng-show="!myVar[student.id]"><button class="btn  btn-primary" ng-click="edit(student.id)">Edit</button></td>
-                    <td  ng-show="myVar[student.id]"><button class="btn  btn-primary" ng-click="save(student.id)">Save</button></td>
-                    <!-- <td><button ng-click="delete(student.id)">Delete</button></td> -->
-                </tr>
-            </table>
-            <div class="center add-button"><button  ng-click="AddStudent()" class="btn  btn-primary ">Add Student</button></div>
-            <div ng-show="toggleAdd">
-                <table align="center" id="newStdntTbl" border="1" class="table">
+        <div ng-controller="IndexController">  
+            <form name="myForm">    
+                <table align="center" id="studentTable" border="1" class="table table-striped">
                     <tr>
-                        <th>Id</th>
-                        <th>LastName</th>
-                        <th>FirstName</th>
+                        <th>ID</th>
+                        <th>Lastname</th>
+                        <th>Firstname</th>
                         <th>Actions</th>
                     </tr>
-                    <tr>
-                        <td>{{newStudent.id}}</td>
-                        <td>
-                            <div><input type="text" ng-model="newStudent.lastName" /></div>
+                    <tr ng-repeat="student in studentModel">
+                        <td>{{student.id}}</td>
+                        <td><div ng-show="!myVar[student.id]"> {{student.lastName}}</div>
+                            <div ng-show="myVar[student.id]"><input type="text" name="lastName1" placeholder="Last name" ng-required="myVar2" ng-model="student.lastName"/></div>
                         </td>
-                        <td>
-                            <div> <input type="text" ng-model="newStudent.firstName"> </div>
+                        <td><div ng-show="!myVar[student.id]">{{student.firstName}}</div>
+                            <div ng-show="myVar[student.id]"}><input type="text" name="firstName1" placeholder="First name" ng-required="myVar2" ng-model="student.firstName" /></div>       
                         </td>
-                        <td>
-                            <div> <button class="btn  btn-primary" ng-click="SaveStudent(newStudent.id)">Save Student</button> </div>
-                        </td>
+                        <td  ng-show="!myVar[student.id]"><button class="btn  btn-primary" ng-click="edit(student.id)">Edit</button></td>
+                        <td  ng-show="myVar[student.id]"><button type="submit" class="btn  btn-primary" ng-click="save(student.id)">Save</button></td>
+                        <!-- <td><button ng-click="delete(student.id)">Delete</button></td> -->
                     </tr>
-                </table>
+            </table>
+            </form>
+            <div class="center add-button"><button  ng-click="AddStudent()" class="btn  btn-primary ">Add Student</button></div>
+            <div ng-show="toggleAdd">
+                <form name="newForm">
+                    <table align="center" id="newStdntTbl" border="1" class="table">
+                        <tr>
+                            <th>Id</th>
+                            <th>LastName</th>
+                            <th>FirstName</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr>
+                            <td>{{newStudent.id}}</td>
+                            <td>
+                                <div><input type="text" name="lastName" ng-model="newStudent.lastName" ng-required="myVar1"/></div>
+                            </td>
+                            <td>
+                                <div> <input type="text" name="firstName" ng-model="newStudent.firstName" ng-required="myVar1" /> </div>
+                            </td>
+                            <td>
+                                <div> <button type="submit" class="btn  btn-primary" ng-click="SaveStudent(newStudent.id)">Save Student</button> </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>  
         </div>
     </div>
