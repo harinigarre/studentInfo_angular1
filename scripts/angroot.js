@@ -25,6 +25,7 @@ app.controller("IndexController", ["$scope", "factoryservice","service1", "$http
        // console.log(id);
          //$scope.myVar = true;
     }
+
     $scope.save = function(id){
         var changedStudent = $scope.studentModel[id-1];
         $http({
@@ -41,6 +42,7 @@ app.controller("IndexController", ["$scope", "factoryservice","service1", "$http
                 console.log("Failed put", response);
                 alert("Save failed");
             });
+
     }
     // $scope.delete = function(id){
     //     $http({
@@ -64,16 +66,24 @@ app.controller("IndexController", ["$scope", "factoryservice","service1", "$http
         $scope.newStudent.firstName = "";
         $scope.newStudent.lastName = "";
     }
+    $scope.myVar1 = true;
     $scope.SaveStudent = function(id){
-        $http({
-            url: "http://localhost:3000/students",
-            method: "POST",
-            data: $scope.newStudent
-        }).then(function(response){
-            alert("Successfully Saved");
-        }, function(response){
-            alert("Save failed");
-        });
+        
+        if( (newForm.lastName.value && newForm.firstName.value) == "" ){
+             $scope.myVar1 = false;
+            alert("Input field cannot be empty");
+        }else{
+            $http({
+                url: "http://localhost:3000/students",
+                method: "POST",
+                data: $scope.newStudent
+            }).then(function(response){
+                alert("Successfully Saved");
+            }, function(response){
+                alert("Save failed");
+            });
+        }
+        
     }
     //on controller load this will be invoked.
     $http({
