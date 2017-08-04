@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/style.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="../scripts/angroot.js"></script>
+</head>
+<body ng-app="myApp">
+    <div class="container my-app">
+        <div class="well heading center">
+            <h1>Students Information</h1>
+            <p>Below are the students information, where we can add, edit and update student details.</p>
+        </div>
+        <div ng-controller="IndexController">      
+            <table align="center" id="studentTable" border="1" class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Lastname</th>
+                    <th>Firstname</th>
+                    <th>Actions</th>
+                </tr>
+                <tr ng-repeat="student in studentModel">
+                    <td>{{student.id}}</td>
+                    <td><div ng-show="!myVar[student.id]"> {{student.lastName}}</div>
+                        <div ng-show="myVar[student.id]"><input type="text" placeholder="Last name" ng-model="student.lastName"/></div>
+                    </td>
+                    <td><div ng-show="!myVar[student.id]">{{student.firstName}}</div>
+                        <div ng-show="myVar[student.id]"}><input type="text" placeholder="First name" ng-model="student.firstName" /></div>       
+                    </td>
+                    <td  ng-show="!myVar[student.id]"><button class="btn  btn-primary" ng-click="edit(student.id)">Edit</button></td>
+                    <td  ng-show="myVar[student.id]"><button class="btn  btn-primary" ng-click="save(student.id)">Save</button></td>
+                    <!-- <td><button ng-click="delete(student.id)">Delete</button></td> -->
+                </tr>
+            </table>
+            <div class="center add-button"><button  ng-click="AddStudent()" class="btn  btn-primary ">Add Student</button></div>
+            <div ng-show="toggleAdd">
+                <table align="center" id="newStdntTbl" border="1" class="table">
+                    <tr>
+                        <th>Id</th>
+                        <th>LastName</th>
+                        <th>FirstName</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <td>{{newStudent.id}}</td>
+                        <td>
+                            <div><input type="text" ng-model="newStudent.lastName" /></div>
+                        </td>
+                        <td>
+                            <div> <input type="text" ng-model="newStudent.firstName"> </div>
+                        </td>
+                        <td>
+                            <div> <button class="btn  btn-primary" ng-click="SaveStudent(newStudent.id)">Save Student</button> </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>  
+        </div>
+    </div>
+</body>
+</html>
